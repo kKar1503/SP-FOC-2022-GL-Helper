@@ -12,6 +12,12 @@ module.exports = {
 	async execute(interaction) {
 		let statementNumber = interaction.options.getInteger('statement');
 		if (!helperStatements[statementNumber]) return await interaction.reply('Statement not found.');
-		await interaction.reply(helperStatements[statementNumber]);
+		const message = await interaction.reply({ content: helperStatements[statementNumber], fetchReply: true });
+		if (statementNumber === 3) {
+			message.react('☎️');
+			message.react('🖌️');
+			message.react('958806929763885096');
+			message.react('958806929889693736');
+		}
 	},
 };
