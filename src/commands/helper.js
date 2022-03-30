@@ -4,9 +4,6 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 // Import helper statement
 const { helperStatements } = require('./helperStatements.json');
 
-// Require modules for generating embeds
-const { MessageEmbed } = require('discord.js');
-
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('help')
