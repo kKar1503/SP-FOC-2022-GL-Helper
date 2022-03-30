@@ -1,6 +1,6 @@
 // Require the necessary discord.js classes
 const { Client, Collection, Intents, Interaction } = require('discord.js');
-const { token } = require('../config.json');
+const { token, guildId, clientId } = require('../config.json');
 
 // Require other necessary modules
 const fs = require('fs');
@@ -35,6 +35,14 @@ client.on('interactionCreate', async (interaction) => {
 	const command = client.commands.get(interaction.commandName);
 
 	if (!command) return;
+
+	if (!interaction.member.roles.cache.some((r) => r.id === '750712375547527248')) {
+		console.log(`${interaction.member.nickname} has no perms.`);
+		return await interaction.reply({
+			content: 'You do not have permission to use the bot!',
+			ephemeral: true,
+		});
+	}
 
 	try {
 		await command.execute(interaction);
