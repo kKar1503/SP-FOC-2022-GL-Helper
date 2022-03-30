@@ -1,6 +1,9 @@
 // Require discordjs/builders for building slash commands
 const { SlashCommandBuilder } = require('@discordjs/builders');
 
+// Import helper statement
+const { helperStatements } = require('./helperStatements.json');
+
 // Require modules for generating embeds
 const { MessageEmbed } = require('discord.js');
 
@@ -11,6 +14,7 @@ module.exports = {
 		.addIntegerOption((option) => option.setName('statement').setDescription('Statement number for the helper lines').setRequired(true)),
 	async execute(interaction) {
 		let statementNumber = interaction.options.getInteger('statement');
-		await interaction.reply(`Helper Statement ${statementNumber}`);
+		if (!helperStatements[statementNumber]) return await interaction.reply('Statement not found.');
+		await interaction.reply(helperStatements[statementNumber]);
 	},
 };
